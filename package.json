@@ -1,0 +1,27 @@
+{
+  "name": "mern-comment-box",
+  "version": "1.0.0",
+  "description": "Build out of project I found here https://medium.com/@bryantheastronaut/ok-here-we-go-b9f683c5a00c",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/randyL78/mern-comment-box.git"
+  },
+  "keywords": [
+    "mern",
+    "react",
+    "mongo",
+    "db",
+    "express",
+    "fullstack"
+  ],
+  "author": "Randy Layne based on Brian Gilbraith's project",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/randyL78/mern-comment-box/issues"
+  },
+  "homepage": "https://github.com/randyL78/mern-comment-box#readme"
+}
