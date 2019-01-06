@@ -25,6 +25,8 @@ router.get('/', (req, res) => {
    res.json({ message: 'Hello World' });
 });
 
+
+// get comments from the database
 router.get('/comments', (req, res) => {
    Comment.find((err, comments) => {
       if (err) 
@@ -33,7 +35,10 @@ router.get('/comments', (req, res) => {
    });
 });
 
+
+// post a new comment to the database
 router.post('/comments', (req, res) => {
+ 
    const {author, text} = req.body;
    const comment = new Comment();
    if(!author) {
@@ -56,6 +61,46 @@ router.post('/comments', (req, res) => {
       return  res.json({success: true});
    });
 });
+
+
+// delete a comment from database
+router.delete('/comments/:commentId', (req, res) => {
+   const {commentId} = req.params;
+
+   if(!commentId)
+      return  res.json({success: false, error: 'No comment id provided'});
+
+   Comment.findByIdAndDelete({_id: commentId}, (error, comment) => {
+      if (error)
+         return  res.json({success: false, error });
+      return  res.json({success: true });
+   });
+});
+
+// make a change to a comment in the database
+router.put('/comments/:commentId', (req, res) => {
+   const {commentId} = req.params;
+
+   if(!commentId)
+      return  res.json({success: false, error: 'No comment id provided'});
+
+   Comment.findById(commentId, (error, comment) => {
+      if (error)
+         return  res.json({success: false, error });
+      const {author, text} = req.body;
+      if (author)
+         comment.author = author;
+      if (text)
+         comment.text = text;
+      comment.save(error => {
+         if (error)
+            return  res.json({success: false, error});
+         return  res.json({success: true });
+      });
+   });
+});
+
+
 
 // Use our router configuration when we call /api
 app.use('/api', router);
